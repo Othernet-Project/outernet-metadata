@@ -72,10 +72,11 @@ def ask_url():
         'URL', validators.url, help="""
         URL of the content package is required in order to generate the package
         template. This URL may be a valid web URL if the content comes from the
-        web, or an URL in the following form: outernet://name.outernet/path
+        web, or an URL in the following form: outernet://name.com/path
         where "name" is any name of your choosing that contains only
         alphanumeric characetrs (a-z, 0-9) and "path" is an arbitrary path
-        specific to your content.
+        specific to your content (e.g., /my-awesome-content), and it needs to
+        contain only alphanumeric characters, dashes and underscores.
         """)
 
 
