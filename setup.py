@@ -53,6 +53,11 @@ setup(
     install_requires=[
         'chainable-validators>=0.3',
     ],
+    entry_points={
+        'console_scripts': [
+            'metacheck = outernet_metadata.validate:main',
+        ],
+    },
     classifiers=[
         'Development Status :: 4 - Beta',
         'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
