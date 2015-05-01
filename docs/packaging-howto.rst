@@ -102,7 +102,7 @@ To prevent clashes between URLs, use this convention::
 The part that says 'my-personal-site.com' is like a domain name on the Internet
 (like 'google.com'). In fact, if you own a site on the web, you can use that
 as your Outernet domain. Don't use 'http://' for content that only lives on
-Outernet, though.
+Outernet, though. ::
 
     outernet://my-personal-site.com/my-awesome-content
     outernet://my-personal-site.com/more-awesome-content
