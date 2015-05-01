@@ -56,6 +56,7 @@ setup(
     entry_points={
         'console_scripts': [
             'metacheck = outernet_metadata.validate:main',
+            'metagen = outernet_metadata.template:main',
         ],
     },
     classifiers=[
