@@ -23,12 +23,17 @@ Relative links
 Let's say we have the following folder structure::
 
     package/
-      |--foo/
-      |   |--bar/
-      |   |   |--bar.html
-      |   |   \--bar.png
-      |   \-foo.html
-      \--index.html
+      |
+      +--foo/
+      |   |
+      |   +--bar/
+      |   |   |
+      |   |   +--bar.html
+      |   |   +--bar.png
+      |   |
+      |   +-foo.html
+      |
+      +--index.html
 
 The ``package`` folder contains an ``index.html`` file. We say the
 ``index.html`` is at the top-level or root of the package. The ``package``
