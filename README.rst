@@ -4,6 +4,30 @@ Outernet Metadata
 
 This package contains tools for working with Outernet metadata.
 
+Prerequisites
+=============
+
+Before you can use the scripts in this package, you will need Python_ 2.7.x or
+3.4.x or newer installed. Depending on the platform, you will also need to
+install pip_. In some cases these are installed with Python.
+
+You will also need to be familiar with the command consoles (Command Prompt,
+terminals, etc). You will also need an editor. If you are on Windows, avoid
+using Notepad. Instead install SublimeText_ or any of the other more
+fully-featured editors.
+
+Installing
+==========
+
+To install this package, use pip. In your command console type the following::
+
+    pip install https://github.com/Outernet-Project/outernet-metadata/archive/master.zip
+
+Getting started
+===============
+
+Please refer to the `Content packaging HOWTO`_ to get started.
+
 About Outernet and Outernet content
 ===================================
 
@@ -33,5 +57,10 @@ Official Outernet metadata specification is maintained as part of this
 repository. You will find them in the `content-metadata-specification.rst`_ 
 file.
 
+.. _Python: https://www.python.org/
+.. _setuptools: https://pypi.python.org/pypi/setuptools
+.. _pip: https://pypi.python.org/pypi/pip/
+.. _SublimeText: http://www.sublimetext.com/
+.. _Content packaging HOWTO: doc/packaging-howto.rst
 .. _Outernet: https://www.outernet.is/
 .. _content-metadata-specification.rst: docs/content-metadata-specification.rst
