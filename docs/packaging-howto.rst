@@ -102,10 +102,21 @@ To prevent clashes between URLs, use this convention::
 The part that says 'my-personal-site.com' is like a domain name on the Internet
 (like 'google.com'). In fact, if you own a site on the web, you can use that
 as your Outernet domain. Don't use 'http://' for content that only lives on
-Outernet, though. ::
+Outernet, though. 
+
+Each content you package should always be under the domain you chose. To that
+you will add a unique path for each piece of content::
 
     outernet://my-personal-site.com/my-awesome-content
     outernet://my-personal-site.com/more-awesome-content
+
+Paths should only contain letters a-z, numbers 0-9, dashes - and underscores _.
+They can also contain slashes / to create paths with arbitrary depth. For
+instance, if you publish content about cars, and also some about cheese, you
+may want to classify them like so::
+
+    outernet://my-personal-site.com/cars/my-awesome-content
+    outernet://my-personal-site.com/cheese/more-awesome-content
 
 Now that we got that out of the way, open your command console (Command Prompt, 
 terminal, etc) and type::
