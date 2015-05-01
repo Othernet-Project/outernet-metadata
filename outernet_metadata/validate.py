@@ -28,7 +28,7 @@ except NameError:
 PLACEHOLDER_RE = re.compile(r'^\$[A-Z]+$')
 LOCALE_RE = re.compile(r'^[a-z]{2}([_-][a-zA-Z]+)?$', re.I)
 COMMASEP_RE = re.compile(r'^[\w ]+(?:, ?[\w ]+)*$', re.U)
-RELPATH_RE = re.compile(r'[^/]+(/.+)*')
+RELPATH_RE = re.compile(r'^[^/]+(/[^/]+)*$')
 TS_FMT = '%Y-%m-%d %H:%M:%S UTC'
 DATE_FMT = '%Y-%m-%d'
 LICENSES = ('CC-BY', 'CC-BY-ND', 'CC-BY-NC', 'CC-BY-ND-NC', 'CC-BY-SA',
@@ -85,12 +85,14 @@ def validate(data):
     if res:
         return res
     # Additional validation that cannot be done using the specs
-    if not data.get('publisher') == data.get('partner'):
-        return {
-            'publisher': ValueError('must match partner'),
-            'partner': ValueError('must match publisher')
-        }
-    return {}
+    if 'publisher' not in data or 'partner' not in data:
+        return {}
+    if data['publisher'] == data['partner']:
+        return {}
+    return {
+        'publisher': ValueError('must match partner'),
+        'partner': ValueError('must match publisher')
+    }
 
 
 def main():
