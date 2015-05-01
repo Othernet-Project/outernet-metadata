@@ -101,7 +101,7 @@ Example::
 license (string)
 ----------------
 
-Content license code. See License Codes for supported values.
+Content license code. See `license codes`_ for supported values.
 
 Software SHOULD display license information next to other metadata in the user
 interface.
@@ -365,3 +365,4 @@ v0.1
 - Initial version.
 
 .. _RFC1738: http://www.ietf.org/rfc/rfc1738.txt
+.. _license codes: license-codes.rst
