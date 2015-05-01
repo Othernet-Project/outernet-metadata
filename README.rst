@@ -15,6 +15,17 @@ Outernet broadcasts content from the web packaged in a ZIP file that contains
 metadata about the content. This package provides functionality for working
 with the metadata.
 
+Scripts
+=======
+
+This package contains two scripts (when installed using setuptools/pip). These
+are:
+
+- metacheck
+- metagen
+
+Please run each with ``-h`` switch to see usage notes.
+
 About the metadata specification
 ================================
 
