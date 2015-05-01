@@ -23,4 +23,4 @@ repository. You will find them in the `content-metadata-specification.rst`_
 file.
 
 .. _Outernet: https://www.outernet.is/
-.. content-metadata-specification.rst: docs/content-metadata-specification.rst
+.. _content-metadata-specification.rst: docs/content-metadata-specification.rst
