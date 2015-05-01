@@ -18,12 +18,10 @@ import json
 
 import validators as v
 
-
 try:
     FILE_ERRORS = (FileNotFoundError, OSError)
 except NameError:
     FILE_ERRORS = (OSError,)
-
 
 PLACEHOLDER_RE = re.compile(r'^\$[A-Z]+$')
 LOCALE_RE = re.compile(r'^[a-z]{2}([_-][a-zA-Z]+)?$', re.I)
@@ -85,6 +83,7 @@ def main():
     import argparse
 
     parser = argparse.ArgumentParser(
+        usage='\n    %(prog)s PATH\n    PATH | %(prog)s',
         description='Validate metadata file')
     parser.add_argument('path', metavar='PATH', help='optional path to '
                         'metadata file (defaults to info.json in current '
