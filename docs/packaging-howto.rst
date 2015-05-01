@@ -163,6 +163,19 @@ Numbers also do not need to be quoted::
 
     "images": 10
 
+If you hand-edited the metadata, you should check if it's still valid. The
+``metacheck`` tool can help you with that. If your folder is called
+'3bd97bbcb5a13980be4b7ed301b46810', then you will run the tool like so::
+
+    metacheck 3bd97bbcb5a13980be4b7ed301b46810/info.json
+
+On Windows, you will need to use backslash instead of forward slash::
+
+    metacheck 3bd97bbcb5a13980be4b7ed301b46810\info.json
+
+The tool will indicate any issues with any of the fields. If it doesn't say
+anything, it means everything is fine.
+
 When you are happy with your metadata, it's time to package things up.
 
 Adding files
