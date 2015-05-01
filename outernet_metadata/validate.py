@@ -35,21 +35,6 @@ LICENSES = ('CC-BY', 'CC-BY-ND', 'CC-BY-NC', 'CC-BY-ND-NC', 'CC-BY-SA',
             'CC-BY-NC-SA', 'GFDL', 'OPL', 'OCL', 'ADL', 'FAL', 'PD', 'OF',
             'ARL', 'ON')
 
-DEFAULTS = {
-    'archive': 'core',
-    'images': 0,
-    'index': 'index.html',
-    'is_partner': False,
-    'is_sponsored': False,
-    'keep_formatting': False,
-    'keywords': '',
-    'language': '',
-    'multipage': False,
-    'partner': '',
-    'publisher': '',
-}
-
-
 SPECS = {
     'title': [v.required, v.nonempty],
     'url': [v.required, v.nonempty, v.url],
