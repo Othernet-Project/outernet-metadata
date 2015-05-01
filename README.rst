@@ -47,6 +47,7 @@ are:
 
 - metacheck
 - metagen
+- imgcount
 
 Please run each with ``-h`` switch to see usage notes.
 
