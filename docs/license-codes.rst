@@ -1,8 +1,13 @@
+======================
+Outernet license codes
+======================
+
 Because human-readable versions of license names must be translatable,
 shorthand codes are used as actual data. This document provides a definitive
 list of such codes with English-language full names.
 
-+ Codes
+Codes
+-----
 
 - ``CC-BY``: Creative Commons Attribution
 - ``CC-BY-ND``: Creative Commons Attribution-NoDerivs
