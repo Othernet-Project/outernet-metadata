@@ -202,7 +202,10 @@ should be that plus '.zip': '3bd97bbcb5a13980be4b7ed301b46810.zip'.
 That's it
 =========
 
-This concludes the content packaging task.
+This concludes the content packaging task. You can test your content on
+Librarian now. For this purpose, we are providing some tools_ to help you get
+started.
 
 .. _JSON: http://json.org/
 .. _convertors: http://www.timezoneconverter.com/cgi-bin/tzc.tzc
+.. _tools: https://github.com/Outernet-Project/librarian-testing-vagrant#vagrant-setup-for-local-librarian-testing
