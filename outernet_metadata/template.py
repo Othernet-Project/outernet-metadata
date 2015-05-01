@@ -52,6 +52,7 @@ def generate_template(**kwargs):
         data[k] = kwargs.get(k, '')
     for k, v in values.DEFAULTS.items():
         data[k] = kwargs.get(k, v)
+    data['broadcast'] = data['broadcast'] or '$BROADCAST'
     return data
 
 

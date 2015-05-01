@@ -18,12 +18,16 @@ from outernet_metadata.values import DEFAULTS
 def test_generate_template():
     """
     Given no arguments, when calling generate_metadata(), then it returns
-    metadata with defaults for optional keys and blanks for required keys.
+    metadata with defaults for optional keys and blanks for required keys,
+    except for broadcast which should be equal to '$BROADCAST'.
     """
     required = ['title', 'url', 'timestamp', 'broadcast', 'license']
     ret = mod.generate_template()
     for k in required:
-        assert ret[k] == ''
+        if k == 'broadcast':
+            assert ret[k] == '$BROADCAST'
+        else:
+            assert ret[k] == ''
     for k in ret.keys():
         if k not in required:
             assert ret[k] == DEFAULTS[k]
