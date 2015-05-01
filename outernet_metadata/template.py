@@ -12,6 +12,7 @@ file that comes with the source code, or http://www.gnu.org/licenses/gpl.txt.
 
 from __future__ import print_function
 
+import sys
 import json
 import hashlib
 import datetime
@@ -21,6 +22,11 @@ import validators
 from . import values
 from . import inpututil
 
+PY3 = sys.version_info >= (3, 0, 0)
+if PY3:
+    FILE_OPTS = {'encoding': 'utf8'}
+else:
+    FILE_OPTS = {}
 
 JSON_OPTS = {'indent': 4, 'sort_keys': True}
 
@@ -205,7 +211,7 @@ def main():
         description='Generate metadata template')
     output = parser.add_mutually_exclusive_group()
     output.add_argument('--out', '-o', metavar='PATH', default=None,
-                        type=argparse.FileType('w', encoding='utf8'),
+                        type=argparse.FileType('w', **FILE_OPTS),
                         help='write just the metadata to a file')
     output.add_argument('--package', '-p', action='store_true',
                         help='create a package template')
@@ -225,7 +231,7 @@ def main():
         meta['url'] = url
         id = md5(url)
         os.makedirs(id)
-        with open(os.path.join(id, 'info.json'), 'w', encoding='utf8') as f:
+        with open(os.path.join(id, 'info.json'), 'w', **FILE_OPTS) as f:
             json.dump(meta, f, **JSON_OPTS)
     else:
         print(json.dumps(meta, **JSON_OPTS))
