@@ -61,6 +61,6 @@ file.
 .. _setuptools: https://pypi.python.org/pypi/setuptools
 .. _pip: https://pypi.python.org/pypi/pip/
 .. _SublimeText: http://www.sublimetext.com/
-.. _Content packaging HOWTO: doc/packaging-howto.rst
+.. _Content packaging HOWTO: docs/packaging-howto.rst
 .. _Outernet: https://www.outernet.is/
 .. _content-metadata-specification.rst: docs/content-metadata-specification.rst
