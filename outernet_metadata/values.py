@@ -22,6 +22,24 @@ DATE_FMT = '%Y-%m-%d'
 LICENSES = ('CC-BY', 'CC-BY-ND', 'CC-BY-NC', 'CC-BY-ND-NC', 'CC-BY-SA',
             'CC-BY-NC-SA', 'GFDL', 'OPL', 'OCL', 'ADL', 'FAL', 'PD', 'OF',
             'ARL', 'ON')
+LICENSE_NAMES = (
+    'Creative Commons Attribution',
+    'Creative Commons Attribution-NoDerivs',
+    'Creative Commons Attribution-NonCommercial',
+    'Creative Commons Attribution-NonCommercial-NoDerivs',
+    'Creative Commons Attribution-ShareAlike',
+    'Creative Commons Attribution-NonCommercial-ShareAlike',
+    'GNU Free Documentation License',
+    'Open Publication License',
+    'Open Content License',
+    'Against DRM License',
+    'Free Art License',
+    'Public Domain',
+    'Other free license',
+    'All rights reserved',
+    'Other non-free license',
+)
+LICENSE_PAIRS = dict(zip(LICENSES, LICENSE_NAMES))
 
 REQUIRED = (
     'title',
