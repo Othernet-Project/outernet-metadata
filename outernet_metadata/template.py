@@ -89,7 +89,8 @@ def ask_keywords():
         cannot contain commas, and multiple keywords are supplied separated by
         commas. For example: medical,medicine,farming,plant,biology
         """)
-    return ','.join([s.strip() for s in ret.split(',')])
+    kws = [s.strip() for s in ret.split(',')]
+    return ','.join([s for s in kws if s])
 
 
 def ask_language():
