@@ -12,6 +12,7 @@ file that comes with the source code, or http://www.gnu.org/licenses/gpl.txt.
 
 from __future__ import print_function
 
+
 import sys
 import json
 import hashlib
@@ -19,6 +20,7 @@ import datetime
 
 import validators
 
+from . import flowutil
 from . import values
 from . import inpututil
 

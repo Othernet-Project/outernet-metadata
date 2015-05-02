@@ -16,6 +16,7 @@ import os
 import sys
 import json
 
+from . import flowutil
 from .pathutil import extcount
 
 PY3 = sys.version_info >= (3, 0, 0)
