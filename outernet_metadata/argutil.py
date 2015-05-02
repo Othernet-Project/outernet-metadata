@@ -8,11 +8,16 @@ This software is free software licensed under the terms of GPLv3. See COPYING
 file that comes with the source code, or http://www.gnu.org/licenses/gpl.txt.
 """
 
+import sys
+import platform
 import argparse
 
 from . import __version__, __copyright__
 
-VERSION = "%(prog)s v{}".format(__version__)
+VERSION = "%(prog)s {} / Python {} {}".format(
+    __version__,
+    '.'.join([str(s) for s in sys.version_info[:3]]),
+    ' '.join(platform.architecture()))
 
 
 def getparser(desc, usage=None):
