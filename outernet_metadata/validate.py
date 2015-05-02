@@ -67,6 +67,7 @@ def validate_path(path):
         for key, err in sorted(errors.items(), key=lambda x: x[0]):
             print('{}: {}'.format(key, err), file=sys.stderr)
         return 1
+    print('{}: OK'.format(path))
     return 0
 
 
