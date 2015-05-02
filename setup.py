@@ -8,6 +8,8 @@ from setuptools.command.test import test as TestCommand
 SCRIPTDIR = os.path.dirname(__file__) or '.'
 PY3 = sys.version_info >= (3, 0, 0)
 
+from outernet_metadata import __version__
+
 
 def read(fname):
     """ Return content of specified file """
@@ -41,7 +43,7 @@ class PyTest(TestCommand):
 
 setup(
     name='outernet-metadata',
-    version='0.1.dev1',
+    version=__version__,
     author='Outernet Inc',
     author_email='apps@outernet.is',
     description='Library for working with Outernet metadata',
