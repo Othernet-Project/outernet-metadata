@@ -210,8 +210,9 @@ def main():
     import os
     import argparse
 
-    parser = argparse.ArgumentParser(
-        description='Generate metadata template')
+    from .argutil import getparser
+
+    parser = getparser('Generate metadata template')
     output = parser.add_mutually_exclusive_group()
     output.add_argument('--out', '-o', metavar='PATH', default=None,
                         type=argparse.FileType('w', **FILE_OPTS),

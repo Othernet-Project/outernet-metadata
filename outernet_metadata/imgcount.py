@@ -28,10 +28,9 @@ else:
 
 
 def main():
-    import argparse
+    from .argutil import getparser
 
-    parser = argparse.ArgumentParser(
-        description='Calculate the number of images in a folder')
+    parser = getparser('Calculate the number of images in a folder')
     parser.add_argument('path', metavar='PATH', nargs='?', default='.',
                         help='path to search for images (default is to search '
                         'inside curent directory)')
