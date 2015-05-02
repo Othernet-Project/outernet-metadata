@@ -16,6 +16,8 @@ import os
 import sys
 import json
 
+from .pathutil import extcount
+
 PY3 = sys.version_info >= (3, 0, 0)
 if PY3:
     FILE_OPTS = {'encoding': 'utf8'}
@@ -23,19 +25,6 @@ if PY3:
 else:
     FILE_OPTS = {}
     FILE_ERRORS = (OSError)
-
-
-def recursematch(path, exts=['.jpg', '.jpeg', '.png', '.gif', '.svg']):
-    if os.path.isfile(path):
-        if os.path.splitext(path)[1] in exts:
-            return 1
-        return 0
-
-    sub = os.listdir(path)
-    total_found = 0
-    for s in sub:
-        total_found += recursematch(os.path.join(path, s), exts)
-    return total_found
 
 
 def main():
@@ -50,7 +39,7 @@ def main():
                         help='update the info.json found at PATH/info.json')
     args = parser.parse_args()
 
-    count = recursematch(args.path)
+    count = extcount(args.path)
     print('images found: {}'.format(count))
 
     if args.update:
