@@ -7,6 +7,21 @@ metadata file. The outernet-metadata package provides tools for laying out the
 directory structure and creating the metadata file. Creating a ZIP file from
 that is a simple matter of zipping up everything.
 
+Version check
+=============
+
+This guide is written for metadata tools version 0.1.dev1. Please check the
+version of the tools you are using by running the following command::
+    
+    metacheck --version
+
+The output should look similar to::
+
+    metacheck 0.1.dev1 / Python 3.4.3 64bit
+
+When reporting bugs, it is also helpful to include this information in the bug
+description.
+
 Gathering content
 =================
 
@@ -173,8 +188,10 @@ On Windows, you will need to use backslash instead of forward slash::
 
     metacheck 3bd97bbcb5a13980be4b7ed301b46810\info.json
 
-The tool will indicate any issues with any of the fields. If it doesn't say
-anything, it means everything is fine.
+The tool will indicate any issues with any of the fields. If there are no
+issues, it will respond with something like::
+
+    3bd97bbcb5a13980be4b7ed301b46810\info.json: OK
 
 When you are happy with your metadata, it's time to package things up.
 
