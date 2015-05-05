@@ -10,15 +10,14 @@ This software is free software licensed under the terms of GPLv3. See COPYING
 file that comes with the source code, or http://www.gnu.org/licenses/gpl.txt.
 """
 
-from __future__ import print_function
-
-import sys
 import json
 
+import conz
 import validators as v
 
-from . import flowutil
 from . import values
+
+cn = conz.Console()
 
 try:
     FILE_ERRORS = (FileNotFoundError, OSError)
@@ -57,43 +56,45 @@ def validate_path(path):
     try:
         data = load(path)
     except FILE_ERRORS:
-        print('{}: file not found'.format(path), file=sys.stderr)
-        sys.exit(1)
+        cn.pverr(path, 'file not found')
+        raise RuntimeError()
     except ValueError:
-        print('{}: invalid JSON format'.format(path), file=sys.stderr)
-        sys.exit(1)
+        cn.pverr(path, 'invalid JSON format')
+        raise RuntimeError()
     errors = validate(data)
     if errors:
+        cn.pstd(cn.color.red('{} ERR'.format(path)))
         for key, err in sorted(errors.items(), key=lambda x: x[0]):
-            print('{}: {}'.format(key, err), file=sys.stderr)
+            err, _ = err.args
+            cn.pverb('{}: {}'.format(key, cn.color.red(err)))
         return 1
-    print('{}: OK'.format(path))
+    cn.pstd(cn.color.green('{} OK'.format(path)))
     return 0
 
 
 def main():
-    import os
-
     from .argutil import getparser
 
     parser = getparser('Validate metadata file',
                        usage='\n    %(prog)s [-h] [-V] PATH\n    '
                        'PATH | %(prog)s [-h] [-V]')
-    parser.add_argument('path', metavar='PATH', help='optional path to '
+    parser.add_argument('paths', metavar='PATH', help='optional path to '
                         'metadata file (defaults to info.json in current '
                         'directory, ignored if used in a pipe',
-                        default='./info.json', nargs='?')
+                        default='./info.json', nargs='*')
     args = parser.parse_args()
 
-    if os.isatty(0):
-        sys.exit(validate_path(args.path))
+    if cn.interm:
+        cn.verbose = True
+        src = args.paths
     else:
-        errors = 0
-        path = sys.stdin.readline()
-        while path:
-            errors = errors or validate_path(path)
-            path = sys.stdin.readline()
-        sys.exit(errors)
+        src = cn.readpipe()
+
+    for p in src:
+        try:
+            validate_path(p)
+        except RuntimeError:
+            cn.pstd(cn.color.red('{} ERR'.format(p)))
 
 
 if __name__ == '__main__':
