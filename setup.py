@@ -53,7 +53,8 @@ setup(
     packages=find_packages(),
     long_description=read('README.rst'),
     install_requires=[
-        'chainable-validators>=0.3',
+        'chainable-validators==0.4.post1',
+        'conz==0.2',
     ],
     entry_points={
         'console_scripts': [
