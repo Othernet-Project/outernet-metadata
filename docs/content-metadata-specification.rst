@@ -7,7 +7,7 @@ that is used by content packaged for Outernet broadcast.
 
 STATUS: stable, draft
 
-CURRENT VERSION: v0.3.3
+CURRENT VERSION: v0.4
 
 .. contents:: Table of Contents
 
@@ -316,6 +316,11 @@ Example::
 
 Changelog
 =========
+
+v0.4
+----
+
+- Switching from semver to major-minor scheme
 
 v0.3.3
 ------
