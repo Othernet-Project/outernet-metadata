@@ -80,7 +80,7 @@ def main():
                        'PATH | %(prog)s [-h] [-V]')
     parser.add_argument('paths', metavar='PATH', help='optional path to '
                         'metadata file (defaults to info.json in current '
-                        'directory, ignored if used in a pipe',
+                        'directory, ignored if used in a pipe)',
                         default=['./info.json'], nargs='*')
     args = parser.parse_args()
 
