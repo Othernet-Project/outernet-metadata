@@ -49,7 +49,7 @@ setup(
     description='Library for working with Outernet metadata',
     license='GPLv3',
     keywords='json, validation, templates, metadata, outernet',
-    url='https://github.com/Outernet-Project/bottle-fdsend',
+    url='https://github.com/Outernet-Project/outernet-metadata',
     packages=find_packages(),
     long_description=read('README.rst'),
     install_requires=[
