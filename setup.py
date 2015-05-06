@@ -49,12 +49,12 @@ setup(
     description='Library for working with Outernet metadata',
     license='GPLv3',
     keywords='json, validation, templates, metadata, outernet',
-    url='https://github.com/Outernet-Project/outernet-metadata',
+    url='https://github.com/Outernet-Project/bottle-fdsend',
     packages=find_packages(),
     long_description=read('README.rst'),
     install_requires=[
         'chainable-validators==0.4.post1',
-        'conz==0.3',
+        'conz>=0.3',
     ],
     entry_points={
         'console_scripts': [
