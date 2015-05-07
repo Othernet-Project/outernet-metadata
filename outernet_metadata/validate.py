@@ -51,7 +51,7 @@ def validate(data):
     }
 
 
-def validate_path(path):
+def validate_path(path, show_summary=False):
     path = path.strip()
     try:
         data = load(path)
@@ -63,7 +63,10 @@ def validate_path(path):
         raise RuntimeError()
     errors = validate(data)
     if errors:
-        cn.pstd(cn.color.red('{} ERR'.format(path)))
+        err = 'ERR'
+        if show_summary:
+            err += ' ' + ' '.join(k for k in errors.keys())
+        cn.pstd(cn.color.red('{} {}'.format(path, err)))
         for key, err in sorted(errors.items(), key=lambda x: x[0]):
             err, _ = err.args
             cn.pverb('{}: {}'.format(key, cn.color.red(err)))
@@ -82,6 +85,8 @@ def main():
                         'metadata file (defaults to info.json in current '
                         'directory, ignored if used in a pipe)',
                         default=['./info.json'], nargs='*')
+    parser.add_argument('--summary', '-s', action='store_true',
+                        help='show a list of invalid keys after ERR')
     args = parser.parse_args()
 
     if cn.interm:
@@ -92,7 +97,7 @@ def main():
 
     for p in src:
         try:
-            validate_path(p)
+            validate_path(p, show_summary=args.summary)
         except RuntimeError:
             cn.pstd(cn.color.red('{} ERR'.format(p)))
 
