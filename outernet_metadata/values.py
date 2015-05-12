@@ -13,6 +13,7 @@ import re
 import validators as v
 
 
+CONTENT_ID_RE = re.compile(r'^[0-9a-f]{32}$', re.I)
 PLACEHOLDER_RE = re.compile(r'^\$[A-Z]+$')
 LOCALE_RE = re.compile(r'^[a-z]{2}([_-][a-zA-Z]+)?$', re.I)
 COMMASEP_RE = re.compile(r'^[\w ]+(?:, ?[\w ]+)*$', re.U)
@@ -61,6 +62,7 @@ OPTIONAL = (
     'multipage',
     'partner',
     'publisher',
+    'replaces',
 )
 
 KEYS = REQUIRED + OPTIONAL
@@ -97,4 +99,5 @@ SPECS = {
     'is_partner': [v.optional(), v.istype(bool)],
     'is_sponsored': [v.optional(), v.istype(bool)],
     'keep_formatting': [v.optional(), v.istype(bool)],
+    'replaces': [v.optional(''), v.match(CONTENT_ID_RE)],
 }

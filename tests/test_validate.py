@@ -32,6 +32,7 @@ BASE_METADATA = {
     'multipage': False,
     'partner': 'foo',
     'publisher': 'foo',
+    'replaces': '6a5afe56ad3d69f2c5a715deda4e32c9',
 }
 
 
@@ -160,6 +161,12 @@ META_VALUES = {
         V('', invalid=True),
         V('foo'),
         V('bar', invalid=True),
+        V(remove=True),
+    ],
+    'replaces': [
+        V('6A5AFE56AD3D69F2C5A715DEDA4E32C9'),
+        V(''),
+        V('foo', invalid=True),
         V(remove=True),
     ],
     'multipage': optional_bool_vals,
