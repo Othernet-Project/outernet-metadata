@@ -7,7 +7,7 @@ that is used by content packaged for Outernet broadcast.
 
 STATUS: stable, draft
 
-CURRENT VERSION: v0.4
+CURRENT VERSION: v0.5
 
 .. contents:: Table of Contents
 
@@ -295,6 +295,24 @@ Example::
 
     true
 
+replaces (string)
+=================
+
+Content ID of another piece of content that this content replaces. Value of
+this key should be a 32-digit hex number that identifies a piece of content.
+
+Software MUST treat the content that is being replaced as older version of the
+content with this key, and modify any references to the replaced content to
+point to the replacing content.
+
+Default::
+    
+    ""
+
+Example::
+
+    "0339a5006863ef2be9cf9bb7cc234292"
+
 Obsolete keys
 =============
 
@@ -316,6 +334,11 @@ Example::
 
 Changelog
 =========
+
+v0.5
+----
+
+- Added replaces key
 
 v0.4
 ----
