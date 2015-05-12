@@ -300,6 +300,8 @@ replaces (string)
 
 Content ID of another piece of content that this content replaces. Value of
 this key should be a 32-digit hex number that identifies a piece of content.
+The value is case-insensitive (i.e., digit "A" is considered identical to digit
+"a").
 
 Software MUST treat the content that is being replaced as older version of the
 content with this key, and modify any references to the replaced content to
