@@ -1,4 +1,4 @@
-__version__ = '0.5.post2'
+__version__ = '0.5.post3'
 __author__ = 'Outernet Inc'
 __copyright__ = """
 Copyright 2015, Outernet Inc.
