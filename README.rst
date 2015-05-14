@@ -21,7 +21,12 @@ Installing
 
 To install this package, use pip. In your command console type the following::
 
-    pip install https://github.com/Outernet-Project/outernet-metadata/archive/master.zip
+    pip install outernet-metadata
+
+For command line tools, conz is also required, but it is not installed
+automatically to allow outernet-metadata's use as a library. To install conz::
+
+    pip install conz
 
 Getting started
 ===============
