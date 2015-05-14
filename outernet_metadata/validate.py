@@ -13,9 +13,8 @@ file that comes with the source code, or http://www.gnu.org/licenses/gpl.txt.
 import json
 
 import conz
-import validators as v
 
-from . import values
+from . import validator
 
 cn = conz.Console()
 
@@ -25,30 +24,11 @@ except NameError:
     FILE_ERRORS = (IOError, OSError,)
 
 
-VALIDATOR = v.spec_validator(values.SPECS,
-                             key=lambda k: lambda obj: obj.get(k))
-
-
 def load(path):
     """ Load JSON data from file """
     with open(path, 'r') as f:
         data = json.load(f)
     return data
-
-
-def validate(data):
-    res = VALIDATOR(data)
-    if res:
-        return res
-    # Additional validation that cannot be done using the specs
-    if 'publisher' not in data or 'partner' not in data:
-        return {}
-    if data['publisher'] == data['partner']:
-        return {}
-    return {
-        'publisher': ValueError('must match partner'),
-        'partner': ValueError('must match publisher')
-    }
 
 
 def validate_path(path):
@@ -61,7 +41,7 @@ def validate_path(path):
     except ValueError:
         cn.pverr(path, 'invalid JSON format')
         raise RuntimeError()
-    errors = validate(data)
+    errors = validator.validate(data)
     if errors:
         cn.pstd(cn.color.red('{} ERR'.format(path)))
         for key, err in sorted(errors.items(), key=lambda x: x[0]):

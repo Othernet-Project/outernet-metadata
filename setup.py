@@ -54,8 +54,10 @@ setup(
     long_description=read('README.rst'),
     install_requires=[
         'chainable-validators>=0.5',
-        'conz>=0.3',
     ],
+    extras_require={
+        'command line tools':  ['conz>=0.3'],
+    },
     entry_points={
         'console_scripts': [
             'metacheck = outernet_metadata.validate:main',

@@ -12,7 +12,7 @@ import pytest
 
 import itertools
 
-import outernet_metadata.validate as mod
+import outernet_metadata.validator as mod
 
 
 BASE_METADATA = {
