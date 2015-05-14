@@ -193,3 +193,10 @@ def metadata_fixtures():
 @pytest.mark.parametrize('data', metadata_fixtures())
 def test_validation(data):
     assert mod.validate(data) == {}
+
+
+def test_broadcast_flag():
+    data = BASE_METADATA.copy()
+    data['broadcast'] = '$BROADCAST'
+    with pytest.raises(ValueError):
+        mod.validate(data, broadcast=True)
