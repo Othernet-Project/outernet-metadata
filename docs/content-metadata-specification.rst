@@ -7,7 +7,7 @@ that is used by content packaged for Outernet broadcast.
 
 STATUS: stable, draft
 
-CURRENT VERSION: v0.5
+CURRENT VERSION: v0.6
 
 .. contents:: Table of Contents
 
