@@ -33,11 +33,6 @@ def validate(data, broadcast=False):
             raise ValueError('broadcast date cannot be a placeholder',
                              'broadcast_strict')
     # Additional validation that cannot be done using the specs
-    if 'publisher' not in data or 'partner' not in data:
+    if 'publisher' not in data:
         return {}
-    if data['publisher'] == data['partner']:
-        return {}
-    return {
-        'publisher': ValueError('must match partner', 'match_other'),
-        'partner': ValueError('must match publisher', 'match_other')
-    }
+    return {}

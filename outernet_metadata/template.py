@@ -194,7 +194,7 @@ def ask_multipage():
 def guide():
     data = {}
     data['title'] = ask_title()
-    data['publisher'] = data['partner'] = ask_publisher()
+    data['publisher'] = ask_publisher()
     data['url'] = ask_url()
     data['keywords'] = ask_keywords()
     data['archive'] = ask_archive()

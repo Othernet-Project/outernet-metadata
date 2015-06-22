@@ -60,7 +60,6 @@ OPTIONAL = (
     'keywords',
     'language',
     'multipage',
-    'partner',
     'publisher',
     'replaces',
 )
@@ -77,7 +76,6 @@ DEFAULTS = {
     'keywords': '',
     'language': '',
     'multipage': False,
-    'partner': '',
     'publisher': '',
 }
 
@@ -94,7 +92,6 @@ SPECS = {
     'index': [v.optional(''), v.match(RELPATH_RE)],
     'keywords': [v.optional(''), v.nonempty, v.match(COMMASEP_RE)],
     'archive': [v.optional(''), v.nonempty],
-    'partner': [v.optional(''), v.nonempty],
     'publisher': [v.optional(''), v.nonempty],
     'is_partner': [v.optional(), v.istype(bool)],
     'is_sponsored': [v.optional(), v.istype(bool)],
