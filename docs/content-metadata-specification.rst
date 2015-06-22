@@ -212,29 +212,10 @@ Example::
 
     "curated"
 
-partner (string) **DEPRECATED**
--------------------------------
-
-Name of content partner or sponsor.
-
-Obsoleted by publisher key. Software SHOULD prefer publisher over this key, and
-treat this key as an alias until it is completely phased out. If both are found
-in the same metadata they MUST have the same value.
-
-Default::
-
-    ""
-
-Example::
-
-    "Project Gutenberg"
-
 publisher (string)
 ------------------
 
 Name of the content publisher.
-Obsoletes the partner key. Clients SHOULD prefer this over partner. If both are
-found in the same metadata they MUST have the same value.
 
 Software SHOULD display attribution information next to other content metadata
 in user interfaces.
@@ -334,8 +315,26 @@ Example::
 
     "en.wikipedia.org"
 
+partner (string)
+----------------
+
+Name of content partner or sponsor.
+
+Obsoleted by publisher key. Software SHOULD prefer publisher over this key, and
+treat this key as an alias until it is completely phased out. If both are found
+in the same metadata they MUST have the same value.
+
+Example::
+
+    "Project Gutenberg"
+
 Changelog
 =========
+
+v0.6
+----
+
+- Removed partner key
 
 v0.5
 ----
