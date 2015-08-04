@@ -62,17 +62,17 @@ OPTIONAL = (
     'multipage',
     'publisher',
     'replaces',
+    'thumbnail',
+    'cover',
 )
 
 KEYS = REQUIRED + OPTIONAL
 
 DEFAULTS = {
     'archive': 'core',
-    'images': 0,
     'index': 'index.html',
     'is_partner': False,
     'is_sponsored': False,
-    'keep_formatting': False,
     'keywords': '',
     'language': '',
     'multipage': False,
@@ -86,9 +86,9 @@ SPECS = {
     'broadcast': [v.required, v.nonempty,
                   v.OR(v.timestamp(DATE_FMT), v.match(PLACEHOLDER_RE))],
     'license': [v.required, v.isin(LICENSES)],
-    'images': [v.optional(), v.istype(int), v.gte(0)],
+    'images': [v.deprecated],
     'language': [v.optional(''), v.nonempty, v.match(LOCALE_RE)],
-    'multipage': [v.optional(), v.istype(bool)],
+    'multipage': [v.deprecated],
     'index': [v.optional(''), v.match(RELPATH_RE)],
     'keywords': [v.optional(''), v.nonempty, v.match(COMMASEP_RE)],
     'archive': [v.optional(''), v.nonempty],
@@ -97,4 +97,6 @@ SPECS = {
     'is_sponsored': [v.optional(), v.istype(bool)],
     'keep_formatting': [v.optional(), v.istype(bool)],
     'replaces': [v.optional(''), v.match(CONTENT_ID_RE)],
+    'thumbnail': [v.optional(''), v.match(RELPATH_RE)],
+    'cover': [v.optional(''), v.match(RELPATH_RE)],
 }
