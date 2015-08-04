@@ -59,7 +59,6 @@ OPTIONAL = (
     'keep_formatting',
     'keywords',
     'language',
-    'multipage',
     'publisher',
     'replaces',
 )
@@ -75,7 +74,6 @@ DEFAULTS = {
     'keep_formatting': False,
     'keywords': '',
     'language': '',
-    'multipage': False,
     'publisher': '',
 }
 
@@ -88,7 +86,6 @@ SPECS = {
     'license': [v.required, v.isin(LICENSES)],
     'images': [v.optional(), v.istype(int), v.gte(0)],
     'language': [v.optional(''), v.nonempty, v.match(LOCALE_RE)],
-    'multipage': [v.optional(), v.istype(bool)],
     'index': [v.optional(''), v.match(RELPATH_RE)],
     'keywords': [v.optional(''), v.nonempty, v.match(COMMASEP_RE)],
     'archive': [v.optional(''), v.nonempty],
