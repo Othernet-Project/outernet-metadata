@@ -18,6 +18,7 @@ PLACEHOLDER_RE = re.compile(r'^\$[A-Z]+$')
 LOCALE_RE = re.compile(r'^[a-z]{2}([_-][a-zA-Z]+)?$', re.I)
 COMMASEP_RE = re.compile(r'^[\w ]+(?:, ?[\w ]+)*$', re.U)
 RELPATH_RE = re.compile(r'^[^/]+(/[^/]+)*$')
+SIZE_RE = re.compile(r'\d+x\d+')
 TS_FMT = '%Y-%m-%d %H:%M:%S UTC'
 DATE_FMT = '%Y-%m-%d'
 LICENSES = ('CC-BY', 'CC-BY-ND', 'CC-BY-NC', 'CC-BY-ND-NC', 'CC-BY-SA',
@@ -62,6 +63,9 @@ OPTIONAL = (
     'multipage',
     'publisher',
     'replaces',
+    'thumbnail',
+    'cover',
+    'content',
 )
 
 KEYS = REQUIRED + OPTIONAL
@@ -77,24 +81,71 @@ DEFAULTS = {
     'language': '',
     'multipage': False,
     'publisher': '',
+    'content': { 'html': {} },
 }
 
+TYPE_SPECS = {
+    'html': {
+        'main': [v.optional(''), v.match(RELPATH_RE)],
+        'keep_formatting': [v.optional(), v.istype(bool)],
+        },
+    'video': {
+        'main': [v.optional(''), v.match(RELPATH_RE)],
+        'description': [v.optional(), v.istype(str)],
+        'duration': [v.optional(), v.istype(int), v.gte(0)],
+        'size': [v.optional(), v.match(SIZE_RE)],
+        },
+    'audio': {
+        'description': [v.optional(), v.istype(str)],
+        'playlist': [v.required, v.istype(list),
+                     v.min_len()],
+        },
+    'audio.playlist': {
+        'file': [v.required, v.istype(str), v.match(RELPATH_RE)],
+        'title': [v.optional(), v.istype(str)],
+        'duration': [v.optional(), v.istype(int), v.gte(1)],
+        },
+    'image': {
+        'description': [v.optional(), v.istype(str)],
+        'album': [v.required, v.istype(list), v.min_len()],
+        },
+    'image.album': {
+        'file': [v.required, v.istype(str), v.match(RELPATH_RE)],
+        'title': [v.optional(), v.istype(str)],
+        'thumbnail': [v.optional(), v.istype(str)],
+        'caption': [v.optional(), v.istype(str)],
+        'size': [v.optional(), v.match(SIZE_RE)],
+        'description': [v.optional(), v.istype(str)],
+        },
+    'generic': {
+        'description': [v.optional(), v.istype(str)],
+        },
+    'app': {
+        'description': [v.optional(), v.istype(str)],
+        'version': [v.optional(), v.istype(str)],
+        },
+  }
+
 SPECS = {
+    'keep_formatting': [v.deprecated],
+    'multipage': [v.deprecated],
+    'images': [v.deprecated],
+    'index': [v.deprecated],
     'title': [v.required, v.nonempty],
     'url': [v.required, v.nonempty, v.url],
     'timestamp': [v.required, v.nonempty, v.timestamp(TS_FMT)],
     'broadcast': [v.required, v.nonempty,
                   v.OR(v.timestamp(DATE_FMT), v.match(PLACEHOLDER_RE))],
     'license': [v.required, v.isin(LICENSES)],
-    'images': [v.optional(), v.istype(int), v.gte(0)],
     'language': [v.optional(''), v.nonempty, v.match(LOCALE_RE)],
-    'multipage': [v.optional(), v.istype(bool)],
-    'index': [v.optional(''), v.match(RELPATH_RE)],
     'keywords': [v.optional(''), v.nonempty, v.match(COMMASEP_RE)],
     'archive': [v.optional(''), v.nonempty],
     'publisher': [v.optional(''), v.nonempty],
     'is_partner': [v.optional(), v.istype(bool)],
     'is_sponsored': [v.optional(), v.istype(bool)],
-    'keep_formatting': [v.optional(), v.istype(bool)],
     'replaces': [v.optional(''), v.match(CONTENT_ID_RE)],
+    'thumbnail': [v.optional(''), v.match(RELPATH_RE)],
+    'cover': [v.optional(''), v.match(RELPATH_RE)],
+    'content': [v.optional(), v.nonempty, v.istype(dict),
+                v.content_type(TYPE_SPECS)],
 }
