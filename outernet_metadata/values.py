@@ -9,12 +9,14 @@ file that comes with the source code, or http://www.gnu.org/licenses/gpl.txt.
 """
 
 import re
+import sys
 
 import validators as v
 from .custom_validators import content_type
 
 
-if 'basestring' in globals():
+PY3 = sys.version_info >= (3, 0, 0)
+if PY3:
     str_type = basestring
 else:
     str_type = str
