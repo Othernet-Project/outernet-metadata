@@ -17,9 +17,9 @@ from .custom_validators import content_type
 
 PY3 = sys.version_info >= (3, 0, 0)
 if PY3:
-    str_type = basestring
-else:
     str_type = str
+else:
+    str_type = basestring
 
 CONTENT_ID_RE = re.compile(r'^[0-9a-f]{32}$', re.I)
 PLACEHOLDER_RE = re.compile(r'^\$[A-Z]+$')
