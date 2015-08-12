@@ -1,4 +1,6 @@
-from validators import chainable, CONTENT_TYPES, spec_validator
+from validators import chainable, spec_validator
+
+CONTENT_TYPES = ['html', 'video', 'audio', 'image', 'generic', 'app']
 
 
 def content_type(TYPE_SPECS):
