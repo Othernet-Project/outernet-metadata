@@ -13,6 +13,11 @@ import re
 import validators as v
 
 
+if 'basestring' in globals():
+    str_type = basestring
+else:
+    str_type = str
+
 CONTENT_ID_RE = re.compile(r'^[0-9a-f]{32}$', re.I)
 PLACEHOLDER_RE = re.compile(r'^\$[A-Z]+$')
 LOCALE_RE = re.compile(r'^[a-z]{2}([_-][a-zA-Z]+)?$', re.I)
@@ -86,43 +91,43 @@ DEFAULTS = {
 
 TYPE_SPECS = {
     'html': {
-        'main': [v.optional(''), v.match(RELPATH_RE)],
+        'main': [v.required, v.match(RELPATH_RE)],
         'keep_formatting': [v.optional(), v.istype(bool)],
         },
     'video': {
-        'main': [v.optional(''), v.match(RELPATH_RE)],
-        'description': [v.optional(), v.istype(str)],
-        'duration': [v.optional(), v.istype(int), v.gte(0)],
+        'main': [v.required, v.match(RELPATH_RE)],
+        'description': [v.optional(), v.isinstance(str_type)],
+        'duration': [v.optional(), v.istype(int), v.gte(1)],
         'size': [v.optional(), v.match(SIZE_RE)],
         },
     'audio': {
-        'description': [v.optional(), v.istype(str)],
+        'description': [v.optional(), v.isinstance(str_type)],
         'playlist': [v.required, v.istype(list),
                      v.min_len()],
         },
     'audio.playlist': {
-        'file': [v.required, v.istype(str), v.match(RELPATH_RE)],
-        'title': [v.optional(), v.istype(str)],
+        'file': [v.required, v.isinstance(str_type), v.match(RELPATH_RE)],
+        'title': [v.optional(), v.isinstance(str_type)],
         'duration': [v.optional(), v.istype(int), v.gte(1)],
         },
     'image': {
-        'description': [v.optional(), v.istype(str)],
+        'description': [v.optional(), v.isinstance(str_type)],
         'album': [v.required, v.istype(list), v.min_len()],
         },
     'image.album': {
-        'file': [v.required, v.istype(str), v.match(RELPATH_RE)],
-        'title': [v.optional(), v.istype(str)],
-        'thumbnail': [v.optional(), v.istype(str)],
-        'caption': [v.optional(), v.istype(str)],
+        'file': [v.required, v.isinstance(str_type), v.match(RELPATH_RE)],
+        'title': [v.optional(), v.isinstance(str_type)],
+        'thumbnail': [v.optional(), v.isinstance(str_type)],
+        'caption': [v.optional(), v.isinstance(str_type)],
         'size': [v.optional(), v.match(SIZE_RE)],
-        'description': [v.optional(), v.istype(str)],
+        'description': [v.optional(), v.isinstance(str_type)],
         },
     'generic': {
-        'description': [v.optional(), v.istype(str)],
+        'description': [v.optional(), v.isinstance(str_type)],
         },
     'app': {
-        'description': [v.optional(), v.istype(str)],
-        'version': [v.optional(), v.istype(str)],
+        'description': [v.optional(), v.isinstance(str_type)],
+        'version': [v.optional(), v.isinstance(str_type)],
         },
   }
 
