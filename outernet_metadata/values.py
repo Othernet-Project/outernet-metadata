@@ -99,38 +99,38 @@ TYPE_SPECS = {
         },
     'video': {
         'main': [v.required, v.match(RELPATH_RE)],
-        'description': [v.optional(), v.isinstance(str_type)],
+        'description': [v.optional(), v.instanceof(str_type)],
         'duration': [v.optional(), v.istype(int), v.gte(1)],
         'size': [v.optional(), v.match(SIZE_RE)],
         },
     'audio': {
-        'description': [v.optional(), v.isinstance(str_type)],
+        'description': [v.optional(), v.instanceof(str_type)],
         'playlist': [v.required, v.istype(list),
                      v.min_len()],
         },
     'audio.playlist': {
-        'file': [v.required, v.isinstance(str_type), v.match(RELPATH_RE)],
-        'title': [v.optional(), v.isinstance(str_type)],
+        'file': [v.required, v.instanceof(str_type), v.match(RELPATH_RE)],
+        'title': [v.optional(), v.instanceof(str_type)],
         'duration': [v.optional(), v.istype(int), v.gte(1)],
         },
     'image': {
-        'description': [v.optional(), v.isinstance(str_type)],
+        'description': [v.optional(), v.instanceof(str_type)],
         'album': [v.required, v.istype(list), v.min_len()],
         },
     'image.album': {
-        'file': [v.required, v.isinstance(str_type), v.match(RELPATH_RE)],
-        'title': [v.optional(), v.isinstance(str_type)],
-        'thumbnail': [v.optional(), v.isinstance(str_type)],
-        'caption': [v.optional(), v.isinstance(str_type)],
+        'file': [v.required, v.instanceof(str_type), v.match(RELPATH_RE)],
+        'title': [v.optional(), v.instanceof(str_type)],
+        'thumbnail': [v.optional(), v.instanceof(str_type)],
+        'caption': [v.optional(), v.instanceof(str_type)],
         'size': [v.optional(), v.match(SIZE_RE)],
-        'description': [v.optional(), v.isinstance(str_type)],
+        'description': [v.optional(), v.instanceof(str_type)],
         },
     'generic': {
-        'description': [v.optional(), v.isinstance(str_type)],
+        'description': [v.optional(), v.instanceof(str_type)],
         },
     'app': {
-        'description': [v.optional(), v.isinstance(str_type)],
-        'version': [v.optional(), v.isinstance(str_type)],
+        'description': [v.optional(), v.instanceof(str_type)],
+        'version': [v.optional(), v.instanceof(str_type)],
         },
   }
 
