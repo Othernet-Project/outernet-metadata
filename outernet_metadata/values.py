@@ -11,6 +11,7 @@ file that comes with the source code, or http://www.gnu.org/licenses/gpl.txt.
 import re
 
 import validators as v
+from .custom_validators import content_type
 
 
 if 'basestring' in globals():
@@ -152,5 +153,5 @@ SPECS = {
     'thumbnail': [v.optional(''), v.match(RELPATH_RE)],
     'cover': [v.optional(''), v.match(RELPATH_RE)],
     'content': [v.optional(), v.nonempty, v.istype(dict),
-                v.content_type(TYPE_SPECS)],
+                content_type(TYPE_SPECS)],
 }
