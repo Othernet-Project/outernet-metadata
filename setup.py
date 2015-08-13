@@ -56,13 +56,12 @@ setup(
         'chainable-validators>=0.6',
     ],
     extras_require={
-        'command line tools':  ['conz>=0.3'],
+        'command line tools':  ['conz>=0.5'],
     },
     entry_points={
         'console_scripts': [
             'metacheck = outernet_metadata.validate:main',
             'metagen = outernet_metadata.template:main',
-            'imgcount = outernet_metadata.imgcount:main',
         ],
     },
     classifiers=[

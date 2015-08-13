@@ -46,7 +46,13 @@ def validate_path(path):
         cn.pstd(cn.color.red('{} ERR'.format(path)))
         for key, err in sorted(errors.items(), key=lambda x: x[0]):
             err, _ = err.args
-            cn.pverb('{}: {}'.format(key, cn.color.red(err)))
+            if '\n' in err:
+                lines = err.strip().split('\n')
+                for l in lines:
+                    k, v = l.split(':')
+                    cn.pverb('{}: {}'.format(k, cn.color.red(v)))
+            else:
+                cn.pverb('{}: {}'.format(key, cn.color.red(err)))
         return 1
     cn.pstd(cn.color.green('{} OK'.format(path)))
     return 0

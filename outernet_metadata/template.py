@@ -19,6 +19,7 @@ import validators
 import conz
 
 from . import values
+from .custom_validators import CONTENT_TYPES
 
 
 PY3 = sys.version_info >= (3, 0, 0)
@@ -172,7 +173,7 @@ def ask_index():
     validator = validators.match(values.RELPATH_RE)
     return cn.rvpl('index [index.html]:', validator=valwrap(validator),
                    intro="""
-                   Index points to the file that should seve as main page of
+                   Index points to the file that should serve as main page of
                    the content.  It should be a relative path relative to the
                    top level path of the content package. If left blank,
                    index.html is assumed.
@@ -191,8 +192,236 @@ def ask_multipage():
                     """)
 
 
+def ask_thumbnail():
+    print()
+    validator = validators.match(values.RELPATH_RE)
+    return cn.rvpl('thumbnail [thumbnail.png]:', validator=valwrap(validator),
+                    intro="""
+                    Thumbnail points to the file that should seve as the
+                    thumbnail of the content.  It should be a relative path
+                    relative to the top level path of the content package. If
+                    left blank, thumbnail.png is assumed.
+                    """, strict=False, default='thumbnail.png')
+
+
+def ask_cover():
+    print()
+    validator = validators.match(values.RELPATH_RE)
+    return cn.rvpl('cover [cover.jpg]:', validator=valwrap(validator),
+                    intro="""
+                    Cover points to the file that should seve as the
+                    cover image of the content.  It should be a relative path
+                    relative to the top level path of the content package. If
+                    left blank, cover.jpg is assumed.
+                    """, strict=False, default='cover.jpg')
+
+
+def ask_html():
+    print()
+    data = {}
+    val = validators.match(values.RELPATH_RE)
+    data['main'] = cn.rvpl('main [index.html]:', validator=valwrap(val),
+                    intro="""
+                    Main HTML file to load when content is opened. Must be a
+                    relative path. Defaults to index.html.
+                    """, strict=False, default='index.html')
+    print()
+    data['keep_formatting'] = cn.yesno('keep_formatting?',
+                    default=False, intro="""
+                    If content uses its own formatting select "yes". Defaults to
+                    false.
+                    """)
+    return data
+
+
+def check_duration(x):
+    try:
+        x = int(x)
+    except ValueError:
+        return False
+    return x >= 1
+
+
+def ask_video():
+    print()
+    data = {}
+    val = validators.match(values.RELPATH_RE)
+    data['main'] = cn.rvpl('main [video.mp4]:', validator=valwrap(val),
+                    intro="""
+                    Main video file to load when content is opened. Must be a
+                    relative path. Defaults to video.mp4.
+                    """, strict=False, default='video.mp4')
+    print()
+    data['description'] = cn.rvpl('description:', intro="""
+                    Short plain-text description of the content package.
+                    Description MUST NOT contain markup or code.
+                    """, strict=False, default='')
+    print()
+    data['duration'] = cn.rvpl('duration:', validator=check_duration, intro="""
+                    Positive non-zero integer representing the duration of a
+                    video file in seconds.
+                    """, strict=False, default='')
+    print()
+    val = validators.match(values.SIZE_RE)
+    data['size'] = cn.rvpl('size:', validator=valwrap(val), intro="""
+                    Size is image size in "WIDTHxHEIGHT" format in pixels.
+                    """, strict=False, default='')
+    return data
+
+
+def ask_audio():
+    print()
+    data = {}
+    data['description'] = cn.rvpl('description:', intro="""
+                    Short plain-text description of the content package.
+                    Description MUST NOT contain markup or code.
+                    """, strict=False, default='')
+    a = True
+    data['playlist'] = []
+    print('\nBeginning to define the playlist. For each item in the playlist the'
+          ' following fields are available: file (required), duration, and '
+          'title. After completing each item you will be asked if you would '
+          ' like to add another.')
+    while a == True:
+        item = {}
+        print()
+        val = validators.match(values.RELPATH_RE)
+        item['file'] = cn.rvpl('file:', validator=valwrap(val),
+                    intro="""
+                    Path to audio file to be played. Must be a relative path.
+                    Required.
+                    """, strict=True)
+        print()
+        item['duration'] = cn.rvpl('duration:', validator=check_duration,
+                    intro="""
+                    Positive non-zero integer representing the duration of a
+                    video file in seconds.
+                    """, strict=False, default='')
+        print()
+        item['title'] = cn.rvpl('title:', strict=False, default='',
+                    validator=valwrap(validators.nonempty),
+                    intro="""
+                    Title of the audio file.
+                    """)
+        print()
+        data['playlist'].append({k: v for k, v in item.items() if v})
+        a = cn.yesno('add another entry?')
+    return data
+
+
+def ask_image():
+    print()
+    data = {}
+    data['description'] = cn.rvpl('description:', intro="""
+                    Short plain-text description of the content package.
+                    Description MUST NOT contain markup or code.
+                    """, strict=False, default='')
+    a = True
+    data['album'] = []
+    print('\nBeginning to define the album. For each item in the album the'
+          ' following fields are available: file (required), title, thumbnail,'
+          ' caption, size, and description. After completing each item you '
+          'will be asked if you would like to add another.')
+    while a == True:
+        item = {}
+        print()
+        val = validators.match(values.RELPATH_RE)
+        item['file'] = cn.rvpl('file:', validator=valwrap(val),
+                    intro="""
+                    Path to image file to be shown. Must be a relative path.
+                    Required.
+                    """, strict=True)
+        print()
+        item['title'] = cn.rvpl('title:', strict=False, default='',
+                    validator=valwrap(validators.nonempty),
+                    intro="""
+                    Title of the image file.
+                    """)
+        print()
+        validator = validators.match(values.RELPATH_RE)
+        item['thumbnail'] = cn.rvpl('thumbnail:', validator=valwrap(validator),
+                    intro="""
+                    Thumbnail of the image. Should be relative to the top level
+                    path of the content package.
+                    """, strict=False, default='')
+        print()
+        item['caption'] = cn.rvpl('caption:', intro="""
+                    A caption to be shown below the image by the viewer.
+                    """, strict=False, default='')
+        print()
+        val = validators.match(values.SIZE_RE)
+        item['size'] = cn.rvpl('size:', validator=valwrap(val), intro="""
+                    Size is image size in "WIDTHxHEIGHT" format in pixels.
+                    """, strict=False, default='')
+        print()
+        item['description'] = cn.rvpl('description:', intro="""
+                    Short plain-text description of the image.  Description
+                    MUST NOT contain markup or code.
+                    """, strict=False, default='')
+        print()
+        data['album'].append({k: v for k, v in item.items() if v})
+        a = cn.yesno('add another entry?')
+    return data
+
+
+def ask_generic():
+    print()
+    data = {}
+    data['description'] = cn.rvpl('description:', intro="""
+                    Short plain-text description of the content package.
+                    Description MUST NOT contain markup or code.
+                    """, strict=False, default='')
+    return data
+
+
+def ask_app():
+    print()
+    data = {}
+    data['description'] = cn.rvpl('description:', intro="""
+                    Short plain-text description of the content package.
+                    Description MUST NOT contain markup or code.
+                    """, strict=False, default='')
+    print()
+    data['version'] = cn.rvpl('version:', intro="""
+                    Arbitrary string containing app version.
+                    """, strict=False, default='')
+    return data
+
+
+def ask_content():
+    TYPE_FUNCTIONS = {
+        'html': ask_html,
+        'video': ask_video,
+        'audio': ask_audio,
+        'image': ask_image,
+        'generic': ask_generic,
+        'app': ask_app
+    }
+    print()
+    types = CONTENT_TYPES
+    val = lambda s: not any(y.strip() not in types for y in s.split(','))
+    resp = cn.rvpl('content type ["html": {}]:', clean=lambda x: x,
+                   error='Must be one of {}'.format(types), validator=val,
+                   default={"html": {}}, intro="""
+                   Content type indicates what type of content preset will be
+                   used. Default is html with a empty dict value.  Multiple
+                   content types are accepted, separated with a comma.
+                   Potential content types are """ + '{}'.format(types))
+    metadata = {}
+    for val in resp.split(','):
+        val = val.strip()
+        metadata[val] = TYPE_FUNCTIONS[val]()
+    data = {k: {x: y} for k, v in metadata.items() for x, y in v.items() if y}
+    print()
+    print(metadata)
+    print()
+    print(data)
+    sys.exit()
+
+
 def guide():
     data = {}
+    data['content'] = ask_content()
     data['title'] = ask_title()
     data['publisher'] = ask_publisher()
     data['url'] = ask_url()
@@ -202,7 +431,9 @@ def guide():
     data['license'] = ask_license()
     data['timestamp'] = ask_timestamp()
     data['index'] = ask_index()
-    data['multipage'] = ask_multipage()
+    data['thumbnail'] = ask_thumbnail()
+    data['cover'] = ask_cover()
+    data['content'] = ask_content()
     data['is_sponsored'] = False
     data['is_partner'] = False
     return data
