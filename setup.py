@@ -53,7 +53,7 @@ setup(
     packages=find_packages(),
     long_description=read('README.rst'),
     install_requires=[
-        'chainable-validators>=0.6',
+        'chainable-validators>=0.7',
     ],
     extras_require={
         'command line tools':  ['conz>=0.5'],
