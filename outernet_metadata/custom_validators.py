@@ -7,7 +7,6 @@ def content_type(TYPE_SPECS):
     @chainable
     def validator(v):
         errors = {}
-        v = [x.strip() for x in v.split(',')]
         for key in v:
             value = v[key]
             key_string = 'content.{}'.format(key)
