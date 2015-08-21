@@ -47,8 +47,7 @@ with the metadata.
 Scripts
 =======
 
-This package contains two scripts (when installed using setuptools/pip). These
-are:
+This package contains the following scripts (when installed using setuptools/pip):
 
 - metacheck
 - metagen
