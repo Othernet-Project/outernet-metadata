@@ -87,7 +87,7 @@ DEFAULTS = {
     'language': '',
     'multipage': False,
     'publisher': '',
-    'content': { 'html': {} },
+    'content': { 'main': {} },
 }
 
 TYPE_SPECS = {

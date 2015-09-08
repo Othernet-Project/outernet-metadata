@@ -412,16 +412,11 @@ def ask_content():
         val = val.strip()
         metadata[val] = TYPE_FUNCTIONS[val]()
     data = {k: {x: y} for k, v in metadata.items() for x, y in v.items() if y}
-    print()
-    print(metadata)
-    print()
-    print(data)
-    sys.exit()
+    return data
 
 
 def guide():
     data = {}
-    data['content'] = ask_content()
     data['title'] = ask_title()
     data['publisher'] = ask_publisher()
     data['url'] = ask_url()
