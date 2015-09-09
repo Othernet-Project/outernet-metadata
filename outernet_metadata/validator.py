@@ -8,13 +8,7 @@ This software is free software licensed under the terms of GPLv3. See COPYING
 file that comes with the source code, or http://www.gnu.org/licenses/gpl.txt.
 """
 
-import validators
-
-from . import values
-
-
-VALIDATOR = validators.spec_validator(
-    values.SPECS, key=lambda k: lambda obj: obj.get(k))
+from generations import get_validator
 
 
 def validate(data, broadcast=False):
@@ -23,7 +17,8 @@ def validate(data, broadcast=False):
     When ``broadcast`` flag is ``True``, then the placeholder value for
     ``broadcast`` is not allowed.
     """
-    res = VALIDATOR(data)
+    validator = get_validator(data)
+    res = validator(data)
     if res:
         return res
     # Strict checking for broadcast
