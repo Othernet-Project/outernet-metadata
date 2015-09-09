@@ -1,5 +1,5 @@
 """
-Shared values
+Values for Outernet Metadata Generation 1
 
 Copyright 2015, Outernet Inc.
 Some rights reserved.
