@@ -21,6 +21,7 @@ if PY3:
 else:
     str_type = basestring
 
+TITLE_WHITESPACE_RE = re.compile(r'[^\n\r\t]*', re.U)
 CONTENT_ID_RE = re.compile(r'^[0-9a-f]{32}$', re.I)
 PLACEHOLDER_RE = re.compile(r'^\$[A-Z]+$')
 LOCALE_RE = re.compile(r'^[a-z]{2}([_-][a-zA-Z]+)?$', re.I)
@@ -108,7 +109,8 @@ TYPE_SPECS = {
         },
     'audio.playlist': {
         'file': [v.required, v.instanceof(str_type), v.match(RELPATH_RE)],
-        'title': [v.optional(), v.instanceof(str_type)],
+        'title': [v.optional(), v.instanceof(str_type),
+                  v.match(TITLE_WHITESPACE_RE)],
         'duration': [v.optional(), v.istype(int), v.gte(1)],
         },
     'image': {
@@ -117,7 +119,8 @@ TYPE_SPECS = {
         },
     'image.album': {
         'file': [v.required, v.instanceof(str_type), v.match(RELPATH_RE)],
-        'title': [v.optional(), v.instanceof(str_type)],
+        'title': [v.optional(), v.instanceof(str_type),
+                  v.match(TITLE_WHITESPACE_RE)],
         'thumbnail': [v.optional(), v.instanceof(str_type)],
         'caption': [v.optional(), v.instanceof(str_type)],
         'size': [v.optional(), v.match(SIZE_RE)],
@@ -137,7 +140,7 @@ SPECS = {
     'multipage': [v.deprecated],
     'images': [v.deprecated],
     'index': [v.deprecated],
-    'title': [v.required, v.nonempty],
+    'title': [v.required, v.nonempty, v.match(TITLE_WHITESPACE_RE)],
     'url': [v.required, v.nonempty, v.url],
     'timestamp': [v.required, v.nonempty, v.timestamp(TS_FMT)],
     'broadcast': [v.required, v.nonempty,
