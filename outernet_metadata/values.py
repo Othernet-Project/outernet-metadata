@@ -74,6 +74,7 @@ OPTIONAL = (
     'thumbnail',
     'cover',
     'content',
+    'url',
 )
 
 KEYS = REQUIRED + OPTIONAL
@@ -139,6 +140,7 @@ SPECS = {
     'multipage': [v.deprecated],
     'images': [v.deprecated],
     'index': [v.deprecated],
+    'url': [v.deprecated],
     'title': [v.required, v.nonempty, v.match(TITLE_WHITESPACE_RE)],
     'timestamp': [v.required, v.nonempty, v.timestamp(TS_FMT)],
     'broadcast': [v.required, v.nonempty,
