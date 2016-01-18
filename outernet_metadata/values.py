@@ -54,7 +54,6 @@ LICENSE_PAIRS = dict(zip(LICENSES, LICENSE_NAMES))
 
 REQUIRED = (
     'title',
-    'url',
     'timestamp',
     'broadcast',
     'license',
@@ -141,7 +140,6 @@ SPECS = {
     'images': [v.deprecated],
     'index': [v.deprecated],
     'title': [v.required, v.nonempty, v.match(TITLE_WHITESPACE_RE)],
-    'url': [v.required, v.nonempty, v.url],
     'timestamp': [v.required, v.nonempty, v.timestamp(TS_FMT)],
     'broadcast': [v.required, v.nonempty,
                   v.OR(v.timestamp(DATE_FMT), v.match(PLACEHOLDER_RE))],
